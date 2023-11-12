@@ -1,34 +1,26 @@
-import react, { useState } from 'react'
-import MovieList from './components/MovieList';
-import './App.css';
 
-function App() {
-   const state ={ movies : [
-  {
-    title:"Viking",
-    description:" good serie of wonderful world",
-    posterURL:'https://i.ytimg.com/vi/dJ32LuLIKc8/maxresdefault.jpg',
-    rate:"9.5",
+// App.js
+import React from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import todoReducer from './redux/reducers.js/reducer';
+import AddTask from './AddTask';
+import ListTask from './ListTask';
+import './App.css'
+import './AddTask.css'
 
-  },
-  {
-    
-    title:"sponjbob",
-    description:" he lives in the sea and people love him so much",
-    posterURL:'https://static.wikia.nocookie.net/spongebobgalaxy/images/0/07/SpongeBob_SquarePants.png/revision/latest/thumbnail/width/360/height/360?cb=20171228024014',
-    rate:"9."
+const store = createStore(todoReducer);
 
-  }
-
-
-  ]};
-   
-
-return(
-  <div>
-    <MovieList movies={state.movies}  />
-
-  </div>
-)
+const App = () => {
+  return (
+    <Provider store={store}>
+      <div>
+        <h1>ToDo App</h1>
+        <AddTask />
+        <ListTask />
+      </div>
+    </Provider>
+  );
 };
+
 export default App;
